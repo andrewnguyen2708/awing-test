@@ -29,7 +29,19 @@ const initialCompaign: CampaignType = {
 	subCampaigns: [generateSubCampaign()],
 };
 
-export const CampaignContext = React.createContext<CampaignContextType>(null);
+const initialContext = {
+	campaign: initialCompaign,
+	errors: {},
+	handleChangeCampaignByName: () => {},
+	handleChangeCampaignbyCheckbox: () => {},
+	handleAddSubCampaign: () => {},
+	handleAddAd: () => {},
+	handleRemoveListAds: () => {},
+	handleRemoveAd: () => {},
+	handleSubmit: () => {},
+};
+
+export const CampaignContext = React.createContext<CampaignContextType>(initialContext);
 
 const CampaignProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	const [campaign, setCompaign] = React.useState<CampaignType>(initialCompaign);
