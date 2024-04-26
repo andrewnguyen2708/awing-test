@@ -5,7 +5,8 @@ function a11yProps(index: number) {
 	};
 }
 
-function set(obj, path, value) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function set(obj: any, path: string, value: string | number | boolean) {
 	let schema = obj;
 	const pList = path.split('.');
 	const len = pList.length;

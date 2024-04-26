@@ -4,7 +4,7 @@ import { Box, Card, Checkbox, FormControlLabel, FormGroup, IconButton, TextField
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ListAds from './ListAds';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
-import { AdsType, SubCampaignType } from '../../@types/campaign';
+import { AdsType, ErrorType, SubCampaignType } from '../../@types/campaign';
 import { CampaignContext } from '../../context/campaignContext';
 
 export default function ListSubCampaign() {
@@ -57,8 +57,8 @@ export default function ListSubCampaign() {
 						label="Tên chiến dịch con"
 						value={campaign.subCampaigns[curSubCampaign].name}
 						onChange={handleChangeCampaignByName}
-						error={errors[`subCampaigns.${curSubCampaign}.name`]}
-						helperText={errors[`subCampaigns.${curSubCampaign}.name`]}
+						error={errors[`subCampaigns.${curSubCampaign}.name` as keyof ErrorType]}
+						helperText={errors[`subCampaigns.${curSubCampaign}.name` as keyof ErrorType]}
 					/>
 				</Grid>
 				<Grid xs={12} md={6} lg={3}>

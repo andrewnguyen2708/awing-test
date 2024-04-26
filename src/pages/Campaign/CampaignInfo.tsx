@@ -2,6 +2,7 @@ import * as React from 'react';
 import { TextField } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import { CampaignContext } from '../../context/campaignContext';
+import { ErrorType } from '../../@types/campaign';
 
 export default function CampaignInfo() {
 	const { errors, campaign, handleChangeCampaignByName } = React.useContext(CampaignContext);
@@ -17,8 +18,8 @@ export default function CampaignInfo() {
 					variant="standard"
 					value={campaign.information.name}
 					onChange={handleChangeCampaignByName}
-					error={errors['information.name']}
-					helperText={errors['information.name']}
+					error={errors['information.name' as keyof ErrorType]}
+					helperText={errors['information.name' as keyof ErrorType]}
 				/>
 			</Grid>
 			<Grid xs={12} md={6} lg={6}>

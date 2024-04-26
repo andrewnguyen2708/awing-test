@@ -6,7 +6,7 @@ export type SubCampaignType = z.infer<typeof subCampaignSchema>;
 
 export type CampaignType = z.infer<typeof campaignschema>;
 
-export type errorType = {
+export type ErrorType = {
 	[string]?: string;
 };
 

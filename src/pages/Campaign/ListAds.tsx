@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import { Button, Checkbox, IconButton, TextField } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
-import { AdsType } from '../../@types/campaign';
+import { AdsType, ErrorType } from '../../@types/campaign';
 import { CampaignContext } from '../../context/campaignContext';
 
 type ListAdsProps = {
@@ -95,8 +95,12 @@ export default function ListA({ curSubCampaign }: ListAdsProps) {
 									variant="standard"
 									value={listAds[index].name}
 									onChange={handleChangeCampaignByName}
-									error={errors[`subCampaigns.${curSubCampaign}.ads.${index}.name`]}
-									helperText={errors[`subCampaigns.${curSubCampaign}.ads.${index}.name`]}
+									error={
+										errors[`subCampaigns.${curSubCampaign}.ads.${index}.name` as keyof ErrorType]
+									}
+									helperText={
+										errors[`subCampaigns.${curSubCampaign}.ads.${index}.name` as keyof ErrorType]
+									}
 								/>
 							</TableCell>
 							<TableCell>
@@ -109,8 +113,16 @@ export default function ListA({ curSubCampaign }: ListAdsProps) {
 									inputProps={{ min: 0 }}
 									value={listAds[index].quantity}
 									onChange={handleChangeCampaignByName}
-									error={errors[`subCampaigns.${curSubCampaign}.ads.${index}.quantity`]}
-									helperText={errors[`subCampaigns.${curSubCampaign}.ads.${index}.quantity`]}
+									error={
+										errors[
+											`subCampaigns.${curSubCampaign}.ads.${index}.quantity` as keyof ErrorType
+										]
+									}
+									helperText={
+										errors[
+											`subCampaigns.${curSubCampaign}.ads.${index}.quantity` as keyof ErrorType
+										]
+									}
 								/>
 							</TableCell>
 							<TableCell align="center">

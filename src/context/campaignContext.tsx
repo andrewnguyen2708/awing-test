@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { set } from '../helper/utils';
-import { AdsType, CampaignContextType, CampaignType, errorType } from '../@types/campaign';
+import { AdsType, CampaignContextType, CampaignType, ErrorType } from '../@types/campaign';
 import { nanoid } from 'nanoid';
 import { campaignschema } from '../helper/schema';
 
@@ -45,7 +45,7 @@ export const CampaignContext = React.createContext<CampaignContextType>(initialC
 
 const CampaignProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	const [campaign, setCompaign] = React.useState<CampaignType>(initialCompaign);
-	const [errors, setErrors] = React.useState<errorType>({});
+	const [errors, setErrors] = React.useState<ErrorType>({});
 
 	const handleChangeCampaignByName = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setCompaign((preCampaign: CampaignType) => {
@@ -53,7 +53,7 @@ const CampaignProvider: React.FC<{ children: React.ReactNode }> = ({ children })
 			const inputValue = isNaN(parseInt(event.target.value)) ? event.target.value : parseInt(event.target.value);
 			setErrors((preError) => {
 				const newError = { ...preError };
-				delete newError[event.target.name];
+				delete newError[event.target.name as keyof ErrorType];
 				return newError;
 			});
 			set(newValue, event.target.name, inputValue);
@@ -116,10 +116,11 @@ const CampaignProvider: React.FC<{ children: React.ReactNode }> = ({ children })
 		if (result.success) {
 			alert('Thêm chiến dịch thành công \n' + JSON.stringify({ campaign: result.data }));
 		} else {
-			const newError = {};
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			const newError: any = {};
 			result.error.issues.forEach((item) => {
-				const path = item.path.join('.');
-				newError[path] = item.message;
+				const path: string = item.path.join('.');
+				newError[path as keyof ErrorType] = item.message;
 			});
 			setErrors(newError);
 		}
