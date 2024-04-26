@@ -51,7 +51,7 @@ export default function ListA({ curSubCampaign }: ListAdsProps) {
 					<TableRow>
 						<TableCell padding="checkbox">
 							<Checkbox
-								checked={listAds.length === listAdsId.length}
+								checked={listAds.length === listAdsId.length && listAdsId.length > 0}
 								indeterminate={listAdsId.length > 0 && listAdsId.length < listAds.length}
 								onClick={handleCheckAll}
 							/>
