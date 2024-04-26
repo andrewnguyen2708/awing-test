@@ -94,6 +94,15 @@ const CampaignProvider: React.FC<{ children: React.ReactNode }> = ({ children })
 	const handleRemoveAd = (subCampaignsIndex: number, adId: string) => {
 		setCompaign((preCampaign: CampaignType) => {
 			const newValue = { ...preCampaign };
+
+			const removeIndex = newValue.subCampaigns[subCampaignsIndex].ads.findIndex(
+				(item: AdsType) => item.id === adId
+			);
+			setErrors((preError) => {
+				const newError = { ...preError };
+				delete newError[`subCampaigns.${subCampaignsIndex}.ads.${removeIndex}.name` as keyof ErrorType];
+				return newError;
+			});
 			newValue.subCampaigns[subCampaignsIndex].ads = newValue.subCampaigns[subCampaignsIndex].ads.filter(
 				(item: AdsType) => item.id != adId
 			);
@@ -123,6 +132,7 @@ const CampaignProvider: React.FC<{ children: React.ReactNode }> = ({ children })
 				newError[path as keyof ErrorType] = item.message;
 			});
 			setErrors(newError);
+			alert('Vui lòng điền đúng và đầy đủ thông tin');
 		}
 	};
 

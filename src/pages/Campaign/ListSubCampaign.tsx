@@ -12,6 +12,15 @@ export default function ListSubCampaign() {
 
 	const { errors, campaign, handleAddSubCampaign, handleChangeCampaignByName, handleChangeCampaignbyCheckbox } =
 		React.useContext(CampaignContext);
+
+	const hasError = React.useMemo(() => {
+		const keys = Object.keys(errors);
+		for (const item of keys) {
+			if (item.includes(`subCampaigns.${curSubCampaign}`)) return true;
+		}
+		return false;
+	}, [errors]);
+	
 	return (
 		<Box
 			sx={{
@@ -34,7 +43,7 @@ export default function ListSubCampaign() {
 							onClick={() => setCurSubCampaign(index)}
 						>
 							<Box display="flex" alignItems="center">
-								<Typography variant="h6" marginRight={1}>
+								<Typography variant="h6" marginRight={1} color={hasError ? 'error' : 'text'}>
 									{item.name}
 								</Typography>
 								<CheckCircleIcon sx={{ fontSize: 15, color: item.status ? 'green' : 'gray' }} />
